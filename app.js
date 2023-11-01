@@ -22,7 +22,9 @@ app.get('/movies', (req, res) => {
 
 app.get('/movie/:id', (req, res) => {
   const id = req.params.id;
-  res.send(`read movie:${id}`);
+  // 在 parameter 拿到的是文字，不過 JSON 拿到的是數字，所以要用 toString 轉換
+  const movie = movies.find((mv) => mv.id.toString() === id)
+  res.render('detail', { movie, BASE_IMG_URL });
 })
 
 app.listen(port, () => {
